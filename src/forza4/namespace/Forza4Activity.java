@@ -1,89 +1,99 @@
 package forza4.namespace;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 
-public class Forza4Activity extends Activity
-{
-    LinearLayout c1;
-    LinearLayout c2;
-    LinearLayout c3;
-    LinearLayout c4;
-    LinearLayout c5;
-    LinearLayout c6;
-    LinearLayout c7;
-    LinearLayout[][] matr;
-    @Override
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
+
+public class Forza4Activity extends Activity {
+    /** Called when the activity is first created. */
+	Pedina ped;
+	int winX, winY, y, col, touchx, raggio;
+	int matr[][]=new int [6][7];
+	FrameLayout griglia;
+	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	matr = new LinearLayout[6][7];
-    	
-    	matr[1][1]=(LinearLayout)findViewById(R.id.cella11);
-    	matr[1][2]=(LinearLayout)findViewById(R.id.cella12);
-    	matr[1][3]=(LinearLayout)findViewById(R.id.cella13);
-    	matr[1][4]=(LinearLayout)findViewById(R.id.cella14);
-    	matr[1][5]=(LinearLayout)findViewById(R.id.cella15);
-    	matr[1][6]=(LinearLayout)findViewById(R.id.cella16);
-    	matr[1][7]=(LinearLayout)findViewById(R.id.cella17);
-    	
-    	matr[2][1]=(LinearLayout)findViewById(R.id.cella21);
-    	matr[2][2]=(LinearLayout)findViewById(R.id.cella22);
-    	matr[2][3]=(LinearLayout)findViewById(R.id.cella23);
-    	matr[2][4]=(LinearLayout)findViewById(R.id.cella24);
-    	matr[2][5]=(LinearLayout)findViewById(R.id.cella25);
-    	matr[2][6]=(LinearLayout)findViewById(R.id.cella26);
-    	matr[2][7]=(LinearLayout)findViewById(R.id.cella27);
-    	
-    	matr[3][1]=(LinearLayout)findViewById(R.id.cella31);
-    	matr[3][2]=(LinearLayout)findViewById(R.id.cella32);
-    	matr[3][3]=(LinearLayout)findViewById(R.id.cella33);
-    	matr[3][4]=(LinearLayout)findViewById(R.id.cella34);
-    	matr[3][5]=(LinearLayout)findViewById(R.id.cella35);
-    	matr[3][6]=(LinearLayout)findViewById(R.id.cella36);
-    	matr[3][3]=(LinearLayout)findViewById(R.id.cella37);
-    	
-    	matr[4][1]=(LinearLayout)findViewById(R.id.cella41);
-    	matr[4][2]=(LinearLayout)findViewById(R.id.cella42);
-    	matr[4][3]=(LinearLayout)findViewById(R.id.cella43);
-    	matr[4][4]=(LinearLayout)findViewById(R.id.cella44);
-    	matr[4][5]=(LinearLayout)findViewById(R.id.cella45);
-    	matr[4][6]=(LinearLayout)findViewById(R.id.cella46);
-    	matr[4][7]=(LinearLayout)findViewById(R.id.cella47);
-    	
-    	matr[5][1]=(LinearLayout)findViewById(R.id.cella51);
-    	matr[5][2]=(LinearLayout)findViewById(R.id.cella52);
-    	matr[5][3]=(LinearLayout)findViewById(R.id.cella53);
-    	matr[5][4]=(LinearLayout)findViewById(R.id.cella54);
-    	matr[5][5]=(LinearLayout)findViewById(R.id.cella55);
-    	matr[5][6]=(LinearLayout)findViewById(R.id.cella56);
-    	matr[5][7]=(LinearLayout)findViewById(R.id.cella57);
-    	
-    	matr[6][1]=(LinearLayout)findViewById(R.id.cella51);
-    	matr[6][2]=(LinearLayout)findViewById(R.id.cella52);
-    	matr[6][3]=(LinearLayout)findViewById(R.id.cella53);
-    	matr[6][4]=(LinearLayout)findViewById(R.id.cella54);
-    	matr[6][5]=(LinearLayout)findViewById(R.id.cella55);
-    	matr[6][6]=(LinearLayout)findViewById(R.id.cella56);
-    	matr[6][7]=(LinearLayout)findViewById(R.id.cella67);
-    	
-    	for(int i=1; i<7; i++)
-    	{
-    		for(int k=1; k<8; k++)
-    			matr[i][k].setBackgroundColor(Color.DKGRAY);
-    	}
-    	    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        c1.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+        griglia = (FrameLayout)findViewById(R.id.frameLayout1);
+        winX = getWindowManager().getDefaultDisplay().getWidth();
+        winY=getWindowManager().getDefaultDisplay().getHeight();
+        if(winX/7>winY/6)
+        	raggio=(int)winY/6;
+        else
+        	raggio=winX/7;
+
+        griglia.setOnTouchListener(new OnTouchListener()
+        {
+        	public boolean onTouch(View v, MotionEvent event)
+   			{
+        		int eventaction = event.getAction();
+        		switch (eventaction)
+        		{
+        		case MotionEvent.ACTION_DOWN:
+        		{
+        			break;
+        		}
+        		case MotionEvent.ACTION_UP:
+        		{
+        			touchx=(int)event.getX();
+        			if(0<=touchx&&touchx<raggio)
+           				col=0;
+           			else if (raggio<=touchx&&touchx<2*raggio)
+           				col=1;
+           			else if (2*raggio<=touchx&&touchx<3*raggio)
+           				col=2;
+           			else if (3*raggio<=touchx&&touchx<4*raggio)
+           				col=3;
+           			else if (4*raggio<=touchx&&touchx<5*raggio)
+           				col=4;
+           			else if (5*raggio<=touchx&&touchx<6*raggio)
+           				col=5;
+           			else if (6*raggio<=touchx)
+           				col=6;
+        			Log.d("Colonna sel.", Integer.toString(col));
+        			inputMatr(matr, col);
+           			printG(matr, raggio, Forza4Activity.this, griglia);
+        		}
+        			break;
+        		}
+        		return true;
+        		
+   			}
+       });
+       
+       
+	}
+	public void printG (int matr[][], int raggio, Context context, FrameLayout fl)
+	{
+		for(int i=0; i<6; i++)
+		{
+			for(int k=0; k<7; k++)
+			{
+				if(matr[i][k]!=0)
+				{
+					ped=new Pedina(context, k*raggio, i*raggio, raggio);
+					fl.addView(ped);
+				}
 			}
-		});
-        
-    }
+		}
+	}
+	public static int[][] inputMatr(int matr[][], int col)
+	{
+		for(int i=5;i>=0; i--)
+		{
+			if(matr[i][col]==0)
+			{
+				matr[i][col]=1;
+				break;
+			}
+		}
+		return matr;
+	}
 }
