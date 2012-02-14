@@ -4,9 +4,9 @@ import android.content.Context;
 import android.widget.FrameLayout;
 
 public class PrintG {
-	Pedina ped;
+	public static Pedina ped;
 	
-	public void printG (int matr[][], int raggio, Context context, FrameLayout fl)
+	public static void printG (int matr[][], int raggio, Context context, FrameLayout fl)
 	{
 		for(int i=0; i<6; i++)
 		{
@@ -14,7 +14,7 @@ public class PrintG {
 			{
 				if(matr[i][k]!=0)
 				{
-					ped=new Pedina(context, k*raggio, i+raggio, raggio);
+					ped=new Pedina(context, k*raggio, i*raggio, raggio);
 					fl.addView(ped);
 				}
 			}

@@ -13,17 +13,17 @@ public class Matrice {
 	static boolean win;
 	
 	
-	//public static void main(String[] arg0) throws IOException{
-	//	int Matr[][];
-	//	col1=col2=col3=col4=col5=col6=col7=5;
-	//	pl1=true;
-	//	pl2=false;
-	//	win=true;
-	//	Matr= new int [6][7];
+	public static void main(String[] arg0) throws IOException{
+		int Matr[][];
+		col1=col2=col3=col4=col5=col6=col7=5;
+		pl1=true;
+		pl2=false;
+		win=true;
+		Matr= new int [6][7];
 
-	//	inputMatric(Matr);
+		inputMatric(Matr);
 		
-	//}
+	}
 	
 	
 //carica matrice in tempo reale(prototipo forza4) funza
