@@ -2,13 +2,16 @@ package forza4.namespace;
 
 public class InputMatr {
 	
-	public static int[][] inputMatr(int matr[][], int col)
+	public static int[][] inputMatr(int matr[][], int col, boolean gio)
 	{
 		for(int i=5;i>=0; i--)
 		{
 			if(matr[i][col]==0)
 			{
-				matr[i][col]=1;			//deve cambiare in base al giocatore
+				if(gio)
+					matr[i][col]=1;
+				else
+					matr[i][col]=2;
 				break;
 			}
 		}

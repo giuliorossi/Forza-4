@@ -14,7 +14,7 @@ public class PrintG {
 			{
 				if(matr[i][k]!=0)
 				{
-					ped=new Pedina(context, k*raggio, i*raggio, raggio);
+					ped=new Pedina(context, k*raggio, i*raggio, raggio, matr[i][k]);
 					fl.addView(ped);
 				}
 			}

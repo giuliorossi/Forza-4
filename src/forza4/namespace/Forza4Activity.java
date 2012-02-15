@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class Forza4Activity extends Activity {
     /** Called when the activity is first created. */
@@ -14,6 +15,7 @@ public class Forza4Activity extends Activity {
 	int winX, winY, y, col, touchx, raggio;
 	int matr[][]=new int [6][7];
 	FrameLayout griglia;
+	boolean gio,win;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState)
@@ -37,12 +39,19 @@ public class Forza4Activity extends Activity {
         		{
         		case MotionEvent.ACTION_UP:
         		{
-        			touchx=(int)event.getX();
-        			//Log.d("touchx", Integer.toString(touchx));
-        			col=InputMatr.getCol(touchx, raggio);
-        			//Log.d("Colonna sel.", Integer.toString(col));
-        			matr=InputMatr.inputMatr(matr,col);
-           			PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
+        			if(!win)
+        			{
+        				touchx=(int)event.getX();
+            			//Log.d("touchx", Integer.toString(touchx));
+            			col=InputMatr.getCol(touchx, raggio);
+            			//Log.d("Colonna sel.", Integer.toString(col));
+            			matr=InputMatr.inputMatr(matr,col,gio);
+            			gio=!gio;
+               			PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
+               			win=CheckWin.checkWin(matr, Forza4Activity.this);
+        			}
+        			else
+        				Toast.makeText(Forza4Activity.this, "Hanno vinto", Toast.LENGTH_SHORT).show();
         		}
         			break;
         		}

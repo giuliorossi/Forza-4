@@ -11,10 +11,13 @@ public class Pedina extends View{
 
 	private ShapeDrawable palla;
 	
-	public Pedina(Context context,int POSx,int POSy, int raggio) {
+	public Pedina(Context context,int POSx,int POSy, int raggio, int gio) {
 		super(context);
 		palla= new ShapeDrawable(new OvalShape());
-		palla.getPaint().setColor(Color.GREEN);			//deve cambiare in base al giocatore
+		if(gio==1)
+			palla.getPaint().setColor(Color.GREEN);
+		else if(gio==2)
+			palla.getPaint().setColor(Color.YELLOW);
 		palla.setBounds(POSx, POSy, POSx+raggio, POSy+raggio);
 		
 	}
