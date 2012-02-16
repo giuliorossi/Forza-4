@@ -13,7 +13,7 @@ public class Forza4Activity extends Activity {
     /** Called when the activity is first created. */
 	Pedina ped;
 	int winX, winY, y, col, touchx, raggio;
-	int matr[][]=new int [6][7];
+	int matr[][];					//=new int [6][7];
 	FrameLayout griglia;
 	boolean gio,win;
 	
@@ -22,6 +22,9 @@ public class Forza4Activity extends Activity {
 	{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        win=false;					//
+        matr=  new int [6][7];		//
         griglia = (FrameLayout)findViewById(R.id.frameLayout1);
         winX = getWindowManager().getDefaultDisplay().getWidth();
         winY = getWindowManager().getDefaultDisplay().getHeight();
@@ -45,8 +48,9 @@ public class Forza4Activity extends Activity {
             			//Log.d("touchx", Integer.toString(touchx));
             			col=InputMatr.getCol(touchx, raggio);
             			//Log.d("Colonna sel.", Integer.toString(col));
+            			if (matr[0][col]==0)
+            				gio=!gio;
             			matr=InputMatr.inputMatr(matr,col,gio);
-            			gio=!gio;
                			PrintG.printG(matr, raggio, Forza4Activity.this, griglia);
                			win=CheckWin.checkWin(matr, Forza4Activity.this);
         			}
